@@ -7,3 +7,5 @@ services:
     command: node build/main.js
     environment:
       - BOT_TOKEN=${BOT_TOKEN}
+      - ENVIRONMENT=production
+      - DATABASE_URL=${DATABASE_URL}
