@@ -1,6 +1,7 @@
 import { ArgsOf, Discord, On } from "discordx";
 import { buildEmbed } from "../utils/embeds.js";
 import { ForumChannel } from "discord.js";
+import { archiveThread } from "../handlers/ThreadHandler.js";
 
 @Discord()
 export class ThreadHandler {
@@ -41,15 +42,7 @@ Also please **never ping** the support team during the support process, we will 
     threads.threads
       .filter((thread) => thread.ownerId === member.id)
       .forEach(async (thread) => {
-        await thread.send({
-          embeds: [
-            buildEmbed(
-              `The user <@${member.id}> has left the server. This thread will be archived.`,
-              "Support Center"
-            ),
-          ],
-        });
-        await thread.setArchived(true, "User left the server");
+        await archiveThread(thread, "User left the server");
       });
   }
 }
