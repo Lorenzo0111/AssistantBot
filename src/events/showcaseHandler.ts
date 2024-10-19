@@ -15,7 +15,7 @@ export class ShowcaseHandler {
   @On({ event: "messageCreate" })
   async onMessage([message]: ArgsOf<"messageCreate">) {
     if (message.author.bot) return;
-    if (message.channelId !== "1252881273106468894") return;
+    if (message.channelId !== "1297107788413272095") return;
 
     await message.react("✨");
     await message.startThread({
