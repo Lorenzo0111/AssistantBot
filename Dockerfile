@@ -34,10 +34,10 @@ COPY --from=build-runner /tmp/app/package.json /app/package.json
 COPY --from=build-runner /tmp/app/prisma /app/prisma
 
 # Install dependencies
-RUN npm install --omit=dev
+RUN pnpm install --omit=dev
 
 # Move build files
 COPY --from=build-runner /tmp/app/build /app/build
 
 # Start bot
-CMD [ "npm", "run", "start" ]
+CMD [ "pnpm", "run", "start" ]

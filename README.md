@@ -43,22 +43,22 @@ A blank template with one command and one event, This is a useful template if yo
 # 🏗 Development
 
 ```
-npm install
-npm run dev
+pnpm install
+pnpm run dev
 ```
 
 If you want to use [Nodemon](https://nodemon.io/) to auto-reload while in development:
 
 ```
-npm run watch
+pnpm run watch
 ```
 
 # 💻 Production
 
 ```
-npm install --production
-npm run build
-npm run start
+pnpm install --production
+pnpm run build
+pnpm run start
 ```
 
 # 🐋 Docker
