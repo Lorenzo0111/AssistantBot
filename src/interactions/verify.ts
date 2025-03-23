@@ -1,4 +1,4 @@
-import { ButtonInteraction } from "discord.js";
+import { ButtonInteraction, MessageFlags } from "discord.js";
 import { ButtonComponent, Discord } from "discordx";
 import { prisma } from "../main.js";
 import { buildEmbed } from "../utils/embeds.js";
@@ -7,7 +7,7 @@ import { buildEmbed } from "../utils/embeds.js";
 export class VerifyInteractions {
   @ButtonComponent({ id: "verify_accept" })
   async verifyAccept(interaction: ButtonInteraction) {
-    await interaction.deferReply({ ephemeral: true });
+    await interaction.deferReply({ flags: [MessageFlags.Ephemeral] });
 
     const request = await prisma.verificationRequest.findUnique({
       where: {
@@ -52,7 +52,7 @@ export class VerifyInteractions {
 
   @ButtonComponent({ id: "verify_deny" })
   async verifyDeny(interaction: ButtonInteraction) {
-    await interaction.deferReply({ ephemeral: true });
+    await interaction.deferReply({ flags: [MessageFlags.Ephemeral] });
 
     const request = await prisma.verificationRequest.findUnique({
       where: {

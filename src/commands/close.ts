@@ -1,4 +1,8 @@
-import { ApplicationCommandOptionType, CommandInteraction } from "discord.js";
+import {
+  ApplicationCommandOptionType,
+  CommandInteraction,
+  MessageFlags,
+} from "discord.js";
 import { Discord, Slash, SlashOption } from "discordx";
 import { archiveThread } from "../handlers/ThreadHandler.js";
 
@@ -19,7 +23,7 @@ export class CloseCommand {
     reason: string,
     interaction: CommandInteraction
   ) {
-    await interaction.deferReply({ ephemeral: true });
+    await interaction.deferReply({ flags: [MessageFlags.Ephemeral] });
     if (await archiveThread(interaction.channel!, reason))
       await interaction.editReply("Thread archived successfully");
     else

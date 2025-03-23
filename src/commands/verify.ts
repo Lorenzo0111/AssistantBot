@@ -2,6 +2,7 @@ import {
   ApplicationCommandOptionType,
   CommandInteraction,
   GuildMember,
+  MessageFlags,
 } from "discord.js";
 import { Discord, Slash, SlashChoice, SlashOption } from "discordx";
 import {
@@ -45,7 +46,7 @@ export class VerifyCommands {
     plugin: string,
     interaction: CommandInteraction
   ) {
-    await interaction.deferReply({ ephemeral: true });
+    await interaction.deferReply({ flags: [MessageFlags.Ephemeral] });
     const response = await runVerification(
       platform,
       id,

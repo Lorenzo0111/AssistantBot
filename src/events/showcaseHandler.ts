@@ -4,6 +4,7 @@ import {
   ButtonInteraction,
   ButtonStyle,
   GuildMember,
+  MessageFlags,
   ThreadAutoArchiveDuration,
 } from "discord.js";
 import { ArgsOf, ButtonComponent, Discord, On } from "discordx";
@@ -62,7 +63,7 @@ If you are ready to start, click the button below to get the **write permission*
       await interaction.reply({
         content:
           "You are banned from the showcase channel. If you think this is a mistake, please contact the staff.",
-        ephemeral: true,
+        flags: [MessageFlags.Ephemeral],
       });
       return;
     }
@@ -73,7 +74,7 @@ If you are ready to start, click the button below to get the **write permission*
     );
     await interaction.reply({
       content: "You now have the permission to write in the showcase channel!",
-      ephemeral: true,
+      flags: [MessageFlags.Ephemeral],
     });
   }
 }

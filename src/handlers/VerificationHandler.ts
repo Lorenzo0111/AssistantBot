@@ -120,33 +120,40 @@ async function verifySpigot(
   plugin: string,
   member: GuildMember
 ): Promise<VerificationResponse> {
-  const { data } = await axios.get(
-    "https://api.spigotmc.org/simple/0.2/index.php?action=getAuthor&id=" +
-      id +
-      "&cb=" +
-      Date.now()
-  );
-  if (!data.id) {
+  try {
+    const { data } = await axios.get(
+      "https://api.spigotmc.org/simple/0.2/index.php?action=getAuthor&id=" +
+        id +
+        "&cb=" +
+        Date.now()
+    );
+    if (!data.id) {
+      return new VerificationResponse(
+        VerificationState.FAILED,
+        "Please insert your spigot id. You can find it in your spigot profile page: https://i.imgur.com/ctPXhqw.png"
+      );
+    }
+
+    if (
+      !data.identities.discord ||
+      (member.id != data.identities.discord &&
+        member.user.tag != data.identities.discord &&
+        member.user.username != data.identities.discord)
+    ) {
+      return new VerificationResponse(
+        VerificationState.FAILED,
+        "Your SpigotMC account is not linked to your discord account. Please link it by setting your discord identity to " +
+          member.user.username +
+          ".\nYou can do that by editing the field here: https://www.spigotmc.org/account/contact-details\n**Discord field:** " +
+          data.identities.discord
+      );
+    }
+
+    return new VerificationResponse(VerificationState.AWAITING);
+  } catch {
     return new VerificationResponse(
       VerificationState.FAILED,
-      "Please insert your spigot id. You can find it in your spigot profile page: https://i.imgur.com/ctPXhqw.png"
+      "An error has occurred while verifying your account. Please make sure you are using your spigot id. You can find it in your spigot profile page: https://i.imgur.com/ctPXhqw.png"
     );
   }
-
-  if (
-    !data.identities.discord ||
-    (member.id != data.identities.discord &&
-      member.user.tag != data.identities.discord &&
-      member.user.username != data.identities.discord)
-  ) {
-    return new VerificationResponse(
-      VerificationState.FAILED,
-      "Your SpigotMC account is not linked to your discord account. Please link it by setting your discord identity to " +
-        member.user.username +
-        ".\nYou can do that by editing the field here: https://www.spigotmc.org/account/contact-details\n**Discord field:** " +
-        data.identities.discord
-    );
-  }
-
-  return new VerificationResponse(VerificationState.AWAITING);
 }
