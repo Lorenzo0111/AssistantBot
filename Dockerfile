@@ -12,7 +12,7 @@ WORKDIR /tmp/app
 COPY package.json .
 
 # Install dependencies
-RUN pnpm install
+RUN pnpm install --frozen-lockfile
 
 # Move source files
 COPY src ./src
@@ -26,6 +26,8 @@ RUN pnpm run build
 ## production runner
 FROM node:lts-alpine as prod-runner
 
+RUN corepack enable
+
 # Set work directory
 WORKDIR /app
 
@@ -34,7 +36,7 @@ COPY --from=build-runner /tmp/app/package.json /app/package.json
 COPY --from=build-runner /tmp/app/prisma /app/prisma
 
 # Install dependencies
-RUN pnpm install --omit=dev
+RUN pnpm install --prod --frozen-lockfile
 
 # Move build files
 COPY --from=build-runner /tmp/app/build /app/build
