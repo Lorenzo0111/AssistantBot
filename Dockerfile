@@ -1,5 +1,5 @@
 ## build runner
-FROM node:lts-alpine as build-runner
+FROM node:lts-alpine AS build-runner
 
 LABEL org.opencontainers.image.source=https://github.com/Lorenzo0111/AssistantBot
 
@@ -25,7 +25,7 @@ RUN pnpm prisma generate
 RUN pnpm run build
 
 ## production runner
-FROM node:lts-alpine as prod-runner
+FROM node:lts-alpine AS prod-runner
 
 RUN corepack enable
 
