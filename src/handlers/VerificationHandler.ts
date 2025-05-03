@@ -1,4 +1,3 @@
-import { Platform } from "@prisma/client";
 import { default as axios } from "axios";
 import {
   ActionRowBuilder,
@@ -6,6 +5,7 @@ import {
   ButtonStyle,
   GuildMember,
 } from "discord.js";
+import { Platform } from "../generated/prisma";
 import { logsChannel, prisma } from "../main.js";
 import { buildEmbed } from "../utils/embeds.js";
 

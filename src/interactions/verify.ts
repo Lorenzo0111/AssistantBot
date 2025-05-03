@@ -28,6 +28,15 @@ export class VerifyInteractions {
       },
     });
 
+    if (request.platform === "SPIGOT")
+      await prisma.spigotPurchase.create({
+        data: {
+          user: request.user,
+          spigotId: request.platformId,
+          plugin: request.plugin,
+        },
+      });
+
     const member = await interaction.guild!.members.fetch(request.user);
     await member.roles.add("1088777689273471056"); // Client
     await member.roles.add("1088777691446120499"); // Vehicles

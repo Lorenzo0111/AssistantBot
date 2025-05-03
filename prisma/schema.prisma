@@ -1,5 +1,6 @@
 generator client {
-  provider = "prisma-client-js"
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
 }
 
 datasource db {
@@ -18,4 +19,14 @@ model VerificationRequest {
   platform   Platform
   platformId String
   plugin     String
+}
+
+model SpigotPurchase {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  user       String
+  plugin     String
+  spigotId   String
+  verifiedAt DateTime @default(now())
+
+  @@unique([user, plugin])
 }
