@@ -42,7 +42,6 @@ RUN pnpm install --prod --frozen-lockfile
 
 # Move build files
 COPY --from=build-runner /tmp/app/build /app/build
-COPY --from=build-runner /tmp/app/src/generated /app/build/generated
 
 # Start bot
 CMD [ "pnpm", "run", "start" ]
