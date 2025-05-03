@@ -1,9 +1,9 @@
 import { dirname, importx } from "@discordx/importer";
+import { PrismaClient } from "@prisma/client";
 import type { Guild, Interaction, Message, TextChannel } from "discord.js";
 import { ActivityType, IntentsBitField } from "discord.js";
 import { Client } from "discordx";
 import { config } from "dotenv";
-import { PrismaClient } from "./generated/prisma";
 
 config();
 
