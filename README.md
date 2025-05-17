@@ -1,99 +1,80 @@
-<div>
-  <p align="center">
-    <a href="https://discordx.js.org" target="_blank" rel="nofollow">
-      <img src="https://discordx.js.org/discordx.svg" width="546" />
-    </a>
-  </p>
-  <p align="center">
-    <a href="https://discordx.js.org/discord"
-      ><img
-        src="https://img.shields.io/discord/874802018361950248?color=5865F2&logo=discord&logoColor=white"
-        alt="Discord server"
-    /></a>
-    <a href="https://www.npmjs.com/package/discordx"
-      ><img
-        src="https://img.shields.io/npm/v/discordx.svg?maxAge=3600"
-        alt="NPM version"
-    /></a>
-    <a href="https://www.npmjs.com/package/discordx"
-      ><img
-        src="https://img.shields.io/npm/dt/discordx.svg?maxAge=3600"
-        alt="NPM downloads"
-    /></a>
-    <a href="https://github.com/discordx-ts/discordx/actions"
-      ><img
-        src="https://github.com/discordx-ts/discordx/workflows/Build/badge.svg"
-        alt="Build status"
-    /></a>
-    <a href="https://www.paypal.me/vijayxmeena"
-      ><img
-        src="https://img.shields.io/badge/donate-paypal-F96854.svg"
-        alt="paypal"
-    /></a>
-  </p>
-  <p align="center">
-    <b> Create a discord bot with TypeScript and Decorators! </b>
-  </p>
+# ![Lorenzo's Assistant](media/banner.png)
+
+<div align="center">
+
+[![GitHub License](https://img.shields.io/github/license/Lorenzo0111/AssistantBot)](LICENSE)
+[![Discord](https://img.shields.io/discord/1088775598337433662)](https://discord.gg/HT47UQXBqG)
+
 </div>
 
-# 📖 Introduction
 
-A blank template with one command and one event, This is a useful template if you want to quickly spin up a project.
+A powerful Discord bot for community management, plugin purchase verification, GitHub integration, and support automation.
 
-# 🏗 Development
+## ✨ Features
 
-```
+- **Purchase Verification System**
+
+  - Users can verify their plugin purchases via the `/verify` command.
+  - The bot checks the user's Spigot account and Discord identity, and assigns roles upon successful verification.
+  - Staff can approve or deny requests via interactive buttons.
+
+- **GitHub Issue Channel Linking**
+
+  - Staff can link a Discord channel to a specific GitHub issue using the `/ghlink` command.
+  - The bot posts updates in the channel when the issue receives new comments or is closed.
+
+- **Thread Management for Support**
+
+  - When a new thread is created in the support forum, the bot welcomes the user and provides instructions for effective support.
+  - If a user leaves the server, any open support threads they own are automatically archived.
+  - Staff can close threads with the `/close` command, optionally providing a reason.
+
+- **Showcase Channel Automation**
+
+  - In the showcase channel, the bot reacts to new messages, starts a thread for comments, and posts channel rules.
+  - Users must accept the rules via a button to gain write access.
+  - Users banned from the showcase channel are prevented from regaining access.
+
+- **Automated GitHub Issue Monitoring**
+  - The bot periodically checks all linked GitHub issues and posts updates or closure notifications in the appropriate channels.
+
+## 🏗 Development
+
+```sh
 pnpm install
 pnpm run dev
 ```
 
-If you want to use [Nodemon](https://nodemon.io/) to auto-reload while in development:
+For auto-reload during development:
 
-```
+```sh
 pnpm run watch
 ```
 
-# 💻 Production
+## 💻 Production
 
-```
+```sh
 pnpm install --production
 pnpm run build
 pnpm run start
 ```
 
-# 🐋 Docker
+## 🐋 Docker
 
 To start your application:
 
-```
+```sh
 docker-compose up -d
 ```
 
 To shut down your application:
 
-```
+```sh
 docker-compose down
 ```
 
 To view your application's logs:
 
-```
+```sh
 docker-compose logs
 ```
-
-For the full command list please view the [Docker Documentation](https://docs.docker.com/engine/reference/commandline/cli/).
-
-# 📜 Documentation
-
-- [discordx.js.org](https://discordx.js.org)
-- [Tutorials (dev.to)](https://dev.to/samarmeena/series/14317)
-
-# ☎️ Need help?
-
-- [Check frequently asked questions](https://discordx.js.org/docs/faq)
-- [Check examples](https://github.com/discordx-ts/discordx/tree/main/packages/discordx/examples)
-- Ask in the community [Discord server](https://discordx.js.org/discord)
-
-# 💖 Thank you
-
-You can support [discordx](https://www.npmjs.com/package/discordx) by giving it a [GitHub](https://github.com/discordx-ts/discordx) star.
