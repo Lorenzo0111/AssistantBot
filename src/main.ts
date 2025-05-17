@@ -1,13 +1,16 @@
 import { dirname, importx } from "@discordx/importer";
+import { Octokit } from "@octokit/rest";
 import { PrismaClient } from "@prisma/client";
 import type { Guild, Interaction, Message, TextChannel } from "discord.js";
 import { ActivityType, IntentsBitField } from "discord.js";
 import { Client } from "discordx";
 import { config } from "dotenv";
+import { startChecker } from "./handlers/IssueHandler.js";
 
 config();
 
 export const prisma = new PrismaClient();
+export const github = new Octokit({ auth: process.env.GITHUB_TOKEN });
 export let logsChannel: TextChannel;
 export let guild: Guild;
 export const bot = new Client({
@@ -63,6 +66,8 @@ async function run() {
   }
 
   await bot.login(process.env.BOT_TOKEN);
+
+  startChecker();
 }
 
 run();

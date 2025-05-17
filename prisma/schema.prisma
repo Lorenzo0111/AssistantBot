@@ -29,3 +29,15 @@ model SpigotPurchase {
 
   @@unique([user, plugin])
 }
+
+model GitHubLink {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  issue     Int
+  owner     String
+  repo      String
+  channel   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([issue, channel])
+}
