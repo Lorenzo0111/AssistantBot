@@ -83,3 +83,39 @@ export async function checkNow() {
 export function startChecker() {
   setInterval(checkNow, 5 * 60 * 1000);
 }
+
+export async function addMetadata(
+  owner: string,
+  repo: string,
+  number: number,
+  metadata: string
+) {
+  const issue = await github.rest.issues.get({
+    owner,
+    repo,
+    issue_number: number,
+  });
+
+  if (issue.status !== 200) return { error: "Issue not found" };
+
+  const response = await github.rest.issues.update({
+    owner,
+    repo,
+    issue_number: number,
+    body: issue.data.body + `\n\n${metadata}`,
+    labels: [
+      ...issue.data.labels
+        .map((label) => {
+          if (typeof label === "string") return label;
+          return label.name;
+        })
+        .filter((label) => label !== undefined),
+      {
+        name: "source: discord",
+        color: "#5965F2",
+      },
+    ],
+  });
+
+  return response.data;
+}

@@ -2,6 +2,7 @@ import { ApplicationCommandOptionType, CommandInteraction } from "discord.js";
 import { Discord, Slash, SlashOption } from "discordx";
 import { prisma } from "../main.js";
 import { buildEmbed } from "../utils/embeds.js";
+import { addMetadata } from "../handlers/IssueHandler.js";
 
 @Discord()
 export class GitHubLinkCommand {
@@ -50,6 +51,13 @@ export class GitHubLinkCommand {
         channel: channel.id,
       },
     });
+
+    await addMetadata(
+      owner,
+      repo,
+      issue,
+      `This issue is linked to a discord ticket. Click [here](${channel.url}) to view it.`
+    );
 
     await interaction.editReply({
       embeds: [
