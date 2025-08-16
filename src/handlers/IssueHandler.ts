@@ -65,7 +65,10 @@ export async function checkNow() {
     const embed = buildEmbed(
       `The issue [#${issue.number}](${issue.html_url}) has been updated by ${lastComment.user?.login ?? "Unknown"}
       
-> ${lastComment.body}`,
+${(lastComment.body ?? "")
+  .split("\n")
+  .map((line) => `> ${line}`)
+  .join("\n")}`,
       "GitHub Link"
     );
 
