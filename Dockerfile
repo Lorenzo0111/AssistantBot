@@ -11,6 +11,7 @@ WORKDIR /tmp/app
 # Move package.json
 COPY package.json .
 COPY pnpm-lock.yaml .
+COPY pnpm-workspace.yaml .
 
 # Install dependencies
 RUN pnpm install --frozen-lockfile
@@ -35,6 +36,7 @@ WORKDIR /app
 # Copy package.json from build-runner
 COPY --from=build-runner /tmp/app/package.json /app/package.json
 COPY --from=build-runner /tmp/app/pnpm-lock.yaml /app/pnpm-lock.yaml
+COPY --from=build-runner /tmp/app/pnpm-workspace.yaml /app/pnpm-workspace.yaml
 COPY --from=build-runner /tmp/app/prisma /app/prisma
 
 # Install dependencies
