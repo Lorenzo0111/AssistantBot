@@ -40,7 +40,7 @@ Please respect our server and channel rules or you permissions to write here wil
 - If you want to comment a post, use its thread
 
 If you are ready to start, click the button below to get the **write permission**.`,
-          "Showcase Channel"
+          "Showcase Channel",
         ).setTitle("✨  Showcase Channel"),
       ],
       components: [
@@ -49,7 +49,7 @@ If you are ready to start, click the button below to get the **write permission*
             .setCustomId("showcase_role")
             .setEmoji("✨")
             .setLabel("Accept rules")
-            .setStyle(ButtonStyle.Success)
+            .setStyle(ButtonStyle.Success),
         ),
       ],
     });
@@ -70,7 +70,7 @@ If you are ready to start, click the button below to get the **write permission*
 
     await interaction.member.roles.add(
       "1297106124327223338", // Showcase Access
-      "Showcase access"
+      "Showcase access",
     );
     await interaction.reply({
       content: "You now have the permission to write in the showcase channel!",

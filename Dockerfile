@@ -44,4 +44,5 @@ RUN pnpm install --prod --frozen-lockfile
 COPY --from=build-runner /tmp/app/build /app/build
 
 # Start bot
+EXPOSE 3000
 CMD [ "pnpm", "run", "start" ]

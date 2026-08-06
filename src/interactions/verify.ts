@@ -52,7 +52,7 @@ export class VerifyInteractions {
         embeds: [
           buildEmbed(
             `You have been successfully verified as a buyer for the ${request.plugin} plugin.`,
-            "Verification"
+            "Verification",
           ),
         ],
       })
@@ -95,7 +95,7 @@ export class VerifyInteractions {
         embeds: [
           buildEmbed(
             `Your verification request for the ${request.plugin} plugin has been denied.\nIf you believe this is an error please contact a staff member.`,
-            "Verification"
+            "Verification",
           ),
         ],
       })

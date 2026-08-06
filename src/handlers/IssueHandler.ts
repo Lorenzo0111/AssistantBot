@@ -5,7 +5,7 @@ export async function getIssue(
   owner: string,
   repo: string,
   id: number,
-  updatedAt?: Date
+  updatedAt?: Date,
 ) {
   const issue = await github.rest.issues.get({
     owner,
@@ -36,7 +36,7 @@ export async function checkNow() {
       link.owner,
       link.repo,
       link.issue,
-      link.updatedAt
+      link.updatedAt,
     );
 
     if (error || !issue) continue;
@@ -47,7 +47,7 @@ export async function checkNow() {
     if (issue.closed_at !== null) {
       const embed = buildEmbed(
         `The issue [#${issue.number}](${issue.html_url}) has been closed by ${issue.closed_by?.login}`,
-        "GitHub Link"
+        "GitHub Link",
       );
 
       await channel.send({ embeds: [embed] });
@@ -65,11 +65,11 @@ export async function checkNow() {
     const embed = buildEmbed(
       `The issue [#${issue.number}](${issue.html_url}) has been updated by ${lastComment.user?.login ?? "Unknown"}
       
-${(lastComment.body ?? "")
+${trimBody(lastComment.body ?? "", lastComment.html_url)
   .split("\n")
   .map((line) => `> ${line}`)
   .join("\n")}`,
-      "GitHub Link"
+      "GitHub Link",
     );
 
     await channel.send({ embeds: [embed] });
@@ -91,7 +91,7 @@ export async function addMetadata(
   owner: string,
   repo: string,
   number: number,
-  metadata: string
+  metadata: string,
 ) {
   const issue = await github.rest.issues.get({
     owner,
@@ -121,4 +121,10 @@ export async function addMetadata(
   });
 
   return response.data;
+}
+
+function trimBody(body: string, url: string) {
+  if (body.length <= 2000) return body;
+
+  return body.slice(0, 2000) + `\n... [(truncated)](${url})`;
 }

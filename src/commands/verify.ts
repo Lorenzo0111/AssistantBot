@@ -44,14 +44,14 @@ export class VerifyCommands {
       type: ApplicationCommandOptionType.String,
     })
     plugin: string,
-    interaction: CommandInteraction
+    interaction: CommandInteraction,
   ) {
     await interaction.deferReply({ flags: [MessageFlags.Ephemeral] });
     const response = await runVerification(
       platform,
       id,
       plugin,
-      interaction.member as GuildMember
+      interaction.member as GuildMember,
     );
     switch (response.state) {
       case VerificationState.SUCCESS:
@@ -59,7 +59,7 @@ export class VerifyCommands {
           embeds: [
             buildEmbed(
               "Your verification request has been approved successfully.",
-              "Verification"
+              "Verification",
             ),
           ],
         });
@@ -69,7 +69,7 @@ export class VerifyCommands {
           embeds: [
             buildEmbed(
               "Your verification request has been submitted.\nRemember it can take up to 24 hours.",
-              "Verification"
+              "Verification",
             ),
           ],
         });
@@ -79,7 +79,7 @@ export class VerifyCommands {
           embeds: [
             buildEmbed(
               response.message || "Your verification request has been denied.",
-              "Verification"
+              "Verification",
             ),
           ],
         });

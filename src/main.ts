@@ -6,8 +6,11 @@ import { ActivityType, IntentsBitField } from "discord.js";
 import { Client } from "discordx";
 import { config } from "dotenv";
 import { startChecker } from "./handlers/IssueHandler.js";
+import { startServer } from "./handlers/WebHandler.js";
 
-config();
+config({
+  quiet: true,
+});
 
 export const prisma = new PrismaClient();
 export const github = new Octokit({ auth: process.env.GITHUB_TOKEN });
@@ -39,11 +42,11 @@ export const bot = new Client({
   },
 });
 
-bot.once("ready", async () => {
+bot.once("clientReady", async () => {
   await bot.initApplicationCommands();
   console.log("Bot started");
   logsChannel = (await bot.channels.fetch(
-    "1088777815777882123"
+    "1088777815777882123",
   )) as TextChannel;
   guild = (await bot.guilds.fetch("1088775598337433662")) as Guild;
 });
@@ -58,7 +61,7 @@ bot.on("messageCreate", (message: Message) => {
 
 async function run() {
   await importx(
-    `${dirname(import.meta.url)}/{events,commands,interactions}/**/*.{ts,js}`
+    `${dirname(import.meta.url)}/{events,commands,interactions}/**/*.{ts,js}`,
   );
 
   if (!process.env.BOT_TOKEN) {
@@ -68,6 +71,7 @@ async function run() {
   await bot.login(process.env.BOT_TOKEN);
 
   startChecker();
+  startServer(bot);
 }
 
 run();

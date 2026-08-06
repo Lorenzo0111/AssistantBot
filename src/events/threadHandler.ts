@@ -23,7 +23,7 @@ export class ThreadHandler {
 - What plugins are you using?
 - Share your server logs (Use a service like [Pastebin](https://pastebin.com/))
 Also please **never ping** the support team during the support process, we will reply as soon as possible.`,
-          "Support Center"
+          "Support Center",
         ),
       ],
     });
@@ -33,7 +33,7 @@ Also please **never ping** the support team during the support process, we will 
   async onLeave([member]: ArgsOf<"guildMemberRemove">) {
     const guild = member.guild;
     const forum = guild.channels.cache.get(
-      "1088777759389667348"
+      "1088777759389667348",
     ) as ForumChannel;
 
     if (!forum) return;

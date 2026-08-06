@@ -21,14 +21,14 @@ export class CloseCommand {
       type: ApplicationCommandOptionType.String,
     })
     reason: string,
-    interaction: CommandInteraction
+    interaction: CommandInteraction,
   ) {
     await interaction.deferReply({ flags: [MessageFlags.Ephemeral] });
     if (await archiveThread(interaction.channel!, reason))
       await interaction.editReply("Thread archived successfully");
     else
       await interaction.editReply(
-        "Thread could not be archived. Is it part of a forum?"
+        "Thread could not be archived. Is it part of a forum?",
       );
   }
 }

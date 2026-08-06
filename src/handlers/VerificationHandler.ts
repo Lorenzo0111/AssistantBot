@@ -29,7 +29,7 @@ export async function runVerification(
   platform: "spigot",
   id: string,
   plugin: string,
-  member: GuildMember
+  member: GuildMember,
 ): Promise<VerificationResponse> {
   let response: VerificationResponse;
 
@@ -44,7 +44,7 @@ export async function runVerification(
   if (previous) {
     return new VerificationResponse(
       VerificationState.FAILED,
-      "You already have a verification request for this plugin. Please wait until it gets approved or denied."
+      "You already have a verification request for this plugin. Please wait until it gets approved or denied.",
     );
   }
 
@@ -64,7 +64,7 @@ export async function runVerification(
         embeds: [
           buildEmbed(
             "A new verification request has been submitted",
-            "Verification"
+            "Verification",
           )
             .setTitle("New verification request")
             .setFields([
@@ -95,7 +95,7 @@ export async function runVerification(
             new ButtonBuilder()
               .setCustomId("verify_deny")
               .setLabel("Deny")
-              .setStyle(ButtonStyle.Danger)
+              .setStyle(ButtonStyle.Danger),
           ),
         ],
       });
@@ -118,19 +118,19 @@ export async function runVerification(
 async function verifySpigot(
   id: string,
   plugin: string,
-  member: GuildMember
+  member: GuildMember,
 ): Promise<VerificationResponse> {
   try {
     const { data } = await axios.get(
       "https://api.spigotmc.org/simple/0.2/index.php?action=getAuthor&id=" +
         id +
         "&cb=" +
-        Date.now()
+        Date.now(),
     );
     if (!data.id) {
       return new VerificationResponse(
         VerificationState.FAILED,
-        "Please insert your spigot id. You can find it in your spigot profile page: https://i.imgur.com/ctPXhqw.png"
+        "Please insert your spigot id. You can find it in your spigot profile page: https://i.imgur.com/ctPXhqw.png",
       );
     }
 
@@ -145,7 +145,7 @@ async function verifySpigot(
         "Your SpigotMC account is not linked to your discord account. Please link it by setting your discord identity to " +
           member.user.username +
           ".\nYou can do that by editing the field here: https://www.spigotmc.org/account/contact-details\n**Discord field:** " +
-          data.identities.discord
+          data.identities.discord,
       );
     }
 
@@ -153,7 +153,7 @@ async function verifySpigot(
   } catch {
     return new VerificationResponse(
       VerificationState.FAILED,
-      "An error has occurred while verifying your account. Please make sure you are using your spigot id. You can find it in your spigot profile page: https://i.imgur.com/ctPXhqw.png"
+      "An error has occurred while verifying your account. Please make sure you are using your spigot id. You can find it in your spigot profile page: https://i.imgur.com/ctPXhqw.png",
     );
   }
 }

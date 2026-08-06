@@ -7,7 +7,6 @@
 
 </div>
 
-
 A powerful Discord bot for community management, plugin purchase verification, GitHub integration, and support automation.
 
 ## ✨ Features

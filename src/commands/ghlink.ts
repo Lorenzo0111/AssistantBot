@@ -33,7 +33,7 @@ export class GitHubLinkCommand {
       type: ApplicationCommandOptionType.Integer,
     })
     issue: number,
-    interaction: CommandInteraction
+    interaction: CommandInteraction,
   ) {
     await interaction.deferReply();
 
@@ -56,7 +56,7 @@ export class GitHubLinkCommand {
       owner,
       repo,
       issue,
-      `This issue is linked to a discord ticket. Click [here](${channel.url}) to view it.`
+      `This issue is linked to a discord ticket. Click [here](${channel.url}) to view it.`,
     );
 
     await interaction.editReply({
@@ -65,7 +65,7 @@ export class GitHubLinkCommand {
           `**Issue ${issue} has been linked to this channel!**
 
   You will now get notifications for this issue in this channel.`,
-          "GitHub Link"
+          "GitHub Link",
         ),
       ],
     });
