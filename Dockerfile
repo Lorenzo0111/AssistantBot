@@ -1,5 +1,10 @@
+FROM node:lts-alpine AS base
+
+COPY --from=ghcr.io/pnpm/pnpm:12-alpine /opt/pnpm /opt/pnpm
+RUN for bin in pnpm pn pnpx pnx; do ln -s "/opt/pnpm/$bin" "/usr/local/bin/$bin"; done
+
 ## build runner
-FROM node:lts-alpine AS build-runner
+FROM base AS build-runner
 
 LABEL org.opencontainers.image.source=https://github.com/Lorenzo0111/AssistantBot
 
@@ -24,7 +29,9 @@ RUN pnpm prisma generate
 RUN pnpm run build
 
 ## production runner
-FROM node:lts-alpine AS prod-runner
+FROM base AS prod-runner
+
+RUN corepack enable
 
 # Set work directory
 WORKDIR /app
