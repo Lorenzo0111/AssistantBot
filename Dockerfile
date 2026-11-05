@@ -42,6 +42,7 @@ COPY --from=build-runner /tmp/app/prisma /app/prisma
 
 # Install dependencies
 RUN pnpm install --prod --frozen-lockfile
+RUN pnpm prisma generate
 
 # Move build files
 COPY --from=build-runner /tmp/app/build /app/build
