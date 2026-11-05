@@ -3,8 +3,6 @@ FROM node:lts-alpine AS build-runner
 
 LABEL org.opencontainers.image.source=https://github.com/Lorenzo0111/AssistantBot
 
-RUN corepack enable
-
 # Set temp directory
 WORKDIR /tmp/app
 
@@ -27,8 +25,6 @@ RUN pnpm run build
 
 ## production runner
 FROM node:lts-alpine AS prod-runner
-
-RUN corepack enable
 
 # Set work directory
 WORKDIR /app
