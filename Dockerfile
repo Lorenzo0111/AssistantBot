@@ -31,8 +31,6 @@ RUN pnpm run build
 ## production runner
 FROM base AS prod-runner
 
-RUN corepack enable
-
 # Set work directory
 WORKDIR /app
 
